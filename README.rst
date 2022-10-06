@@ -52,3 +52,41 @@ RandomWords Stateful widget 만들기
 | 대부분의 코드는 state 내부에 존재하며 RandomWords widget의 상태를 유지한다.
 | 이 클래스는 단어의 목록을 생성해 저장하고 지속적으로 사용될 것이다.
 
+
+Create an inifinite scrolling ListView
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| ``_RandomWordsState``\를 단어 목록을 생성하도록 확장
+| ``ListView``\의 builder 팩토리 생성자는 list view를 지연되게 생성하도록 만들어 줄 것이다.
+
+:``_suggestions`` list: state에 대해서, 저장된 단어 목록을 저장한다.
+:``_biggerFont`` variable: state에 대해서, 폰트사이즈를 저장한다.
+:``ListView`` widget: state class에 Listview.builder 생성자를 사용하여 위젯을 더하게 된다.
+
+   - ``ListView.itermBuilder(arg1, arg2)``\: 팩토리 함수. 
+
+      :arg1: ``BuildContext``
+      :arg2: row Iterator, ``i``
+
+.. code-block:: dart
+
+   class _RandomWordsState extends State<RandomWords> {
+      final _suggestions = <WordPair>[];
+      final _biggerFont = const TextStyle(fontSize: 18);
+
+      @override
+      Widget build(BuildContext context) {
+         return ListView.builder(
+            padding: const EdgeInsets.all(16.0),
+            itemBuilder: (context, i) { /*1*/
+               if (i.isOdd) return const Divider(); /*2*/
+
+               final index = i ~/ 2; /*3*/           
+               if (index >= _suggestions.length) {
+                  _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+               }                                   
+               return Text(_suggestions[index].asPascalCase);
+            },
+          );
+      }
+   }
