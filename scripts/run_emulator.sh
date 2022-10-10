@@ -1,3 +1,4 @@
 #!/bin/bash
 
-~/Android/Sdk/emulator/emulator -avd flutter_emulator_2 -netdelay none -netspeed full
+~/Android/Sdk/emulator/emulator -avd Pixel_3_API_33 -netdelay none -netspeed full
+
