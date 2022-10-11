@@ -1,35 +1,61 @@
-proj1
-#####
+Flutter Howto
+#############
 
 A new Flutter project.
+
+Commands
+--------
 
 :``~/Android/Sdk/emulator/emulator``\: CLI tool for android emulator
 
     :``~/Android/Sdk/emulator/emulator -list-avds``\: list the avds
-    ``~/Android/Sdk/emulator/emulator -avd flutter_emulator_2 -netdelay none -netspeed full``\: run the app on target emulator
+    :``~/Android/Sdk/emulator/emulator -avd <AVD-name> -netdelay none -netspeed full``\: run the app on target emulator
 
 :``flutter devices``\: Check available devices on client
 :``flutter run``\: run the flutter app on emulator, press r to reload src
 :``flutter pub``\: flutter package manager
 
    :``flutter pub get``\: pull the package into project
-
    :``flutter pub add english_words``\: add pacakge and writes to ``pubsepc.yaml``
+
+Essential
+---------
+
+.. code-block:: dart
+
+   void main() {
+      runApp(const AppFactory());                     // Entry point
+   }
+
+   // class AppFactory extends StatelessWidget {      // Default Widget
+   //     const AppFactory({Key? key}) : super(key: key);
+	//     @override
+	//     Widget build(BuildContext context) {        /* Must be overriden
+   //         return (MaterialApp());                 // return Type Widget
+   //     }
 
 Add Stateful widget
 -------------------
 
 상태없는 위젯은 immutable하다.
-   그들의 속성은 변할 수 없고, 모든 값은 ``final``\이다.
+
+   :``class StatelessWidget``\: 그들의 속성은 변할 수 없고, 모든 값은 ``final``\이다.
+
+      - Widget의 build메서드를 포함한다.
 
 | Stateful widgets는 위젯의 생명주기 동안 상태를 변경할 수 있다.
 | 상태가 가진 위젯을 만들기 위해서는 2개의 클래스가 필요하다.
 
    :``class StatefulWidget``\: State의 인스턴스를 생성한다. 불변의 것이고 삭제후 재생성가능하다.
+
+      - 정보를 저장하고, 값을 변경할 수 있다.
+
    :``class State``\: 위젯의 생명주기 동안 유지된다.
 
+      - Widget을 return 하는 build메서드를 포함하며, 이는 Widget의 상태가 변경될떄 호출된다.
+
 RandomWords Stateful widget 만들기
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------
 
 .. code-block:: dart
 
@@ -54,7 +80,7 @@ RandomWords Stateful widget 만들기
 
 
 Create an inifinite scrolling ListView
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------
 
 | ``_RandomWordsState``\를 단어 목록을 생성하도록 확장
 | ``ListView``\의 builder 팩토리 생성자는 list view를 지연되게 생성하도록 만들어 줄 것이다.
@@ -90,3 +116,23 @@ Create an inifinite scrolling ListView
           );
       }
    }
+
+Navigate Thorugh widgets
+------------------------
+
+.. code-block:: dart
+
+onPressed: () {
+// 뒤로가기
+Navigator.pop(context);
+},
+
+
+onPressed: () {
+// 페이지 이동
+Navigator.push(
+context,
+MaterialPageRoute(builder: (context) => SecondPage()),
+);
+},
+
