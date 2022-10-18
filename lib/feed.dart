@@ -12,7 +12,7 @@ class _FeedState extends State<Feed> {
 				ClipRRect(
 					borderRadius: BorderRadius.circular(8),
 					child: Image.network(
-						'https://cdn2.thecatapi.com/images/6bt.jpg',
+						widget.imageUrl,
 						width: 100,
 						height: 100,
 						fit: BoxFit.cover,
@@ -83,7 +83,11 @@ class _FeedState extends State<Feed> {
 }
 
 class Feed extends StatefulWidget {
-	const Feed({super.key});
+	const Feed({
+		Key? key,
+		required this.imageUrl,
+	});
+	final String imageUrl;
 
 	@override
 	State<Feed> createState() => _FeedState();
