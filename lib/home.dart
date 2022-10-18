@@ -59,11 +59,11 @@ class HomePage extends StatelessWidget {
 			body: Padding(
 				padding: const EdgeInsets.symmetric(horizontal: 16),
 				child: ListView.separated(
-					itemCount: 10,
+					itemCount: images.length,
 					itemBuilder: (context, index) {
 						return Padding(
 							padding: const EdgeInsets.symmetric(vertical: 12),
-							child: Feed(),
+							child: Feed(imageUrl: images[index]),
 						);
 					},
 					separatorBuilder: (context, index) {
